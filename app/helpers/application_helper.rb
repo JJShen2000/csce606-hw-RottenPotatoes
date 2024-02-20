@@ -14,17 +14,18 @@ module ApplicationHelper
       end
     end
     title ||= column.titleize
-    title += if order == 'asc'
-               '⬆️'
-             else
-               '⬇️'
-             end
+    if params[:key] == column || session[:key] == column
+      title += if order == 'asc'
+                 '⬆️'
+               else
+                 '⬇️'
+               end
+    end
 
     link_to title, { key: column, order: }
-    # , {:class => css_class}
   end
 
   def column_class(column)
-    column == params[:key] || column == session[:key] ? "key_column" : "default_column"
+    column == params[:key] || column == session[:key] ? 'key_column' : 'default_column'
   end
 end
