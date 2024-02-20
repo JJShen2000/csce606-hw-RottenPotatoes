@@ -13,3 +13,31 @@
  *= require_tree .
  *= require_self
  */
+
+
+.key_column {
+    color: white;
+    background: black;
+    /* width: 100%; */
+    table-layout: auto;
+    /* width: 100%; */
+    /* max-width: 100%; */
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+.key_column > a{
+    color: white;
+}
+
+.default_column {
+    color: white;
+    background: gray;
+    table-layout: auto;
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+.default_column > a{
+    color: white;
+}

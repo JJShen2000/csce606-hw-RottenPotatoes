@@ -3,6 +3,7 @@
 # ApplicationHelper contains some helper methods for application
 module ApplicationHelper
   def sortable(column, title = nil)
+    # css_class = column == params[:key] || column == session[:key] ? "key_column" : "default_column"
     order = 'asc'
     if %w[asc desc].include?(params[:order])
       order = params[:order] == 'desc' ? 'asc' : 'desc'
@@ -20,5 +21,10 @@ module ApplicationHelper
              end
 
     link_to title, { key: column, order: }
+    # , {:class => css_class}
+  end
+
+  def column_class(column)
+    column == params[:key] || column == session[:key] ? "key_column" : "default_column"
   end
 end

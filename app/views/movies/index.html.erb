@@ -5,10 +5,11 @@
 <table>
   <thead>
     <tr>
-      <th><%= sortable("title") %></th>
-      <th><%= sortable("rating") %></th>
-      <th><%= sortable("release_date", "Release Date", ) %></th>
-      <th>Action</th>
+      <%# % th=sortable("title") %>
+      <th class="<%= column_class("title") %>"><%= sortable("title") %></th> 
+      <th class="<%= column_class("rating") %>"><%= sortable("rating") %></th>
+      <th class="<%= column_class("release_date") %>"><%= sortable("release_date", "Release Date", ) %></th>
+      <th class="<%= column_class("action") %>">Action</th>
     </tr>
   </thead>
   <tbody>
