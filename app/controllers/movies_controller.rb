@@ -3,9 +3,21 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: %i[show edit update destroy]
 
-  # GET /movies or /movies.json
   def index
-    @movies = Movie.all
+    if !Movie.column_names.include?(params[:key]) || !%w[asc desc].include?(params[:order])
+      if Movie.column_names.include?(session[:key])
+        @movies = Movie.order("#{session[:key]} #{session[:order]}")
+        return
+      else
+        session[:key] = 'title'
+        session[:order] = 'asc'
+      end
+    else
+      session[:key] = params[:key]
+      session[:order] = params[:order] == 'asc' ? 'desc' : 'asc'
+    end
+
+    @movies = Movie.order("#{params[:key]} #{params[:order]}")
   end
 
   # GET /movies/1 or /movies/1.json
@@ -14,6 +26,8 @@ class MoviesController < ApplicationController
   # GET /movies/new
   def new
     @movie = Movie.new
+    # session[:key] = "title"
+    # session[:order] = "desc"
   end
 
   # GET /movies/1/edit
