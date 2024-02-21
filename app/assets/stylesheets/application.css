@@ -43,10 +43,17 @@
   display: flex;
 }
 
-.table > thead > tr > th > a {
+.table > thead > tr > th > form > button{
   color: white;
   font-size: large;
+  font-family: "Consolas", monospace;
   text-decoration: none;
+  border: none;
+  width: 100%;
+}
+
+.table > thead > tr > th > form > button:hover{
+  background-color: maroon;
 }
 
 .table > thead > tr > th:hover {
@@ -70,12 +77,13 @@
 .key_column {
   color: white;
   background: rgb(41, 41, 41);
-  /* width: 100%; */
   table-layout: auto;
-  /* width: 100%; */
-  /* max-width: 100%; */
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.key_column > form > button{
+  background-color: rgb(41, 41, 41);
 }
 
 .default_column {
@@ -84,4 +92,8 @@
   table-layout: auto;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.default_column > form > button{
+  background-color: gray;
 }

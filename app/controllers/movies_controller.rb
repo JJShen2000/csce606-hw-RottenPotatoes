@@ -2,12 +2,12 @@
 
 # Controller for Movie
 class MoviesController < ApplicationController
+  # skip_before_action :preload_data, raise: false
   before_action :set_movie, only: %i[show edit update destroy]
 
   def index
-    puts params[:key], params[:order], session[:key], session[:order]
-    if !Movie.column_names.include?(params[:key]) || !%w[asc desc].include?(params[:order])
-      if Movie.column_names.include?(session[:key])
+    if !params[:key].presence || !params[:order].presence
+      if session[:key].presence
         @movies = Movie.order("#{session[:key]} #{session[:order]}")
         return
       else
@@ -15,16 +15,8 @@ class MoviesController < ApplicationController
         session[:order] = 'asc'
       end
     else
-      session[:order] = if session[:key] == params[:key]
-                          params[:order] == 'asc' ? 'desc' : 'asc'
-                        else
-                          params[:order]
-                        end
+      session[:order] = params[:order]
       session[:key] = params[:key]
-      # if session[:key] == params[:key]
-      #   session[:order] = params[:order] == 'asc' ? 'desc' : 'asc'
-      # end
-      # session[:order] = params[:order] == 'asc' ? 'desc' : 'asc'
     end
 
     @movies = Movie.order("#{params[:key]} #{params[:order]}")
